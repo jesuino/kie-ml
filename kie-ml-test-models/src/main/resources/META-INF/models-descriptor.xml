@@ -1,0 +1,33 @@
+<models>
+	<model>
+		<id>mnist</id>
+		<name>MNIST digit recognition</name>
+		<descrtiption>Recognize handwritten digits using the MNIST dataset
+		</descrtiption>
+		<provider>deeplearning4j</provider>
+		<modelBinPath>models/minist-model.zip</modelBinPath>
+		<modelLabelsPath>labels/mnist_labels.txt</modelLabelsPath>
+		<transformDescriptor>
+			<name>ImageTransformer</name>
+			<param>
+				<name>height</name>
+				<value>28</value>
+			</param>
+			<param>
+				<name>width</name>
+				<value>28</value>
+			</param>
+			<param>
+				<name>channels</name>
+				<value>1</value>
+			</param>
+		</transformDescriptor>
+	</model>
+	<!-- <model> -->
+	<!-- <id>iris2dj48</id> -->
+	<!-- <name>Iris 2d classifier</name> -->
+	<!-- <descrtiption>Iris 2d classifier using Weka J48 C4.5 implementation</descrtiption> -->
+	<!-- <provider>weka</provider> -->
+	<!-- <modelBinPath>models/iris2DJ48.bin</modelBinPath> -->
+	<!-- </model> -->
+</models>

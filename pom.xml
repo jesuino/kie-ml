@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fxapps.ml</groupId>
+	<artifactId>kie-ml-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>KIE ML Parent</name>
+	<packaging>pom</packaging>
+	<description>Parent project for Kie ML</description>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<modules>
+		<module>kie-ml-api</module>
+		<module>kie-server-services-ml</module>
+		<module>kie-ml-dl4j</module>
+		<module>kie-ml-test-models</module>
+		<module>kie-ml-test</module>
+	</modules>
+	<!-- TODO: Add dependencies -->
+</project>

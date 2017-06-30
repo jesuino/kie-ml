@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fxapps.ml</groupId>
+	<artifactId>kie-ml-dist</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Kie ML Dist</name>
+	<description>Create the JARs to be placed on Kie Server</description>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<!-- TODO: organize dependencies on a parent pom -->
+	<dependencies>
+		<dependency>
+			<groupId>org.fxapps.ml</groupId>
+			<artifactId>kie-ml-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.fxapps.ml</groupId>
+			<artifactId>kie-ml-dl4j</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.fxapps.ml</groupId>
+			<artifactId>kie-server-services-ml</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution> 
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<excludeScope>provided</excludeScope>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+				    <excludeScope>provided</excludeScope>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
