@@ -1,9 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.fxapps.ml</groupId>
+		<artifactId>kie-ml-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.fxapps.ml</groupId>
 	<artifactId>kie-ml-dist</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Kie ML Dist</name>
 	<description>Create the JARs to be placed on Kie Server</description>
 	<properties>
@@ -37,7 +40,7 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<version>3.0.1</version>
 				<executions>
-					<execution> 
+					<execution>
 						<id>copy-dependencies</id>
 						<phase>package</phase>
 						<goals>
@@ -53,7 +56,7 @@
 					</execution>
 				</executions>
 				<configuration>
-				    <excludeScope>provided</excludeScope>
+					<excludeScope>provided</excludeScope>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -104,7 +104,7 @@ public class KieMLResource {
 					conversationIdHeader);
 		} catch (Exception e) {
 			logger.error("Unexpected error running prediction. Message: '{}'", e.getMessage(), e);
-			return internalServerError("UUnexpected error running prediction: " + e.getMessage(), v,
+			return internalServerError("Unexpected error running prediction: " + e.getMessage(), v,
 					conversationIdHeader);
 		}
 	}
