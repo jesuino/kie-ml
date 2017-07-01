@@ -11,7 +11,6 @@
 	<description>A Machine extension to allow the execution of pre-trained modules inside Kie Server.</description>
 
 	<properties>
-		<version.org.kie>6.5.0.Final</version.org.kie>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -24,19 +23,20 @@
 		<dependency>
 			<groupId>org.kie.server</groupId>
 			<artifactId>kie-server-api</artifactId>
-			<version>${version.org.kie}</version>
+			<version>${kie.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.kie.server</groupId>
 			<artifactId>kie-server-services-common</artifactId>
-			<version>${version.org.kie}</version>
+			<version>${kie.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.kie.server</groupId>
 			<artifactId>kie-server-rest-common</artifactId>
-			<version>${version.org.kie}</version>
+			<version>${kie.api.version}</version>
+
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

@@ -10,6 +10,7 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<kie.api.version>6.5.0.Final</kie.api.version>
 	</properties>
 
 	<modules>
@@ -19,5 +20,18 @@
 		<module>kie-ml-test-models</module>
 		<module>kie-ml-test</module>
 	</modules>
-	<!-- TODO: Add dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-api</artifactId>
+			<version>${kie.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.kie</groupId>
+			<artifactId>kie-ci</artifactId>
+            <version>${kie.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>
