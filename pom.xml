@@ -18,9 +18,12 @@
 		<module>kie-ml-api</module>
 		<module>kie-server-services-ml</module>
 		<module>kie-server-ml-client</module>
+		<module>kie-ml-weka</module>
 		<module>kie-ml-dl4j</module>
 		<module>kie-ml-test-models</module>
 		<module>kie-ml-test</module>
+		<module>kie-ml-dist</module>
+
 	</modules>
 	<dependencies>
 		<dependency>
@@ -32,7 +35,7 @@
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-ci</artifactId>
-            <version>${kie.api.version}</version>
+			<version>${kie.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
