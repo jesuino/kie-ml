@@ -1,4 +1,4 @@
-package org.fxapps.ml.services;
+package org.fxapps.ml.services.resources;
 
 import static org.kie.server.api.rest.RestURI.CONTAINER_ID;
 import static org.kie.server.remote.rest.common.util.RestUtils.buildConversationIdHeader;
@@ -22,6 +22,7 @@ import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
 import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.services.KieMLServicesBase;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.remote.rest.common.Header;
 import org.kie.server.services.api.KieServerRegistry;
@@ -29,7 +30,7 @@ import org.kie.server.services.impl.marshal.MarshallerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path("server/containers/{id}/kieml")
+@Path(KieMLResourceConstants.BASE)
 public class KieMLResource {
 	public static final Logger logger = LoggerFactory.getLogger(KieMLResource.class);
 
@@ -45,6 +46,7 @@ public class KieMLResource {
 	}
 
 	@GET
+	@Path(KieMLResourceConstants.GET_MODELS)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response getModels(@javax.ws.rs.core.Context HttpHeaders headers,
 			@PathParam(CONTAINER_ID) String containerId) {
@@ -67,10 +69,10 @@ public class KieMLResource {
 	}
 
 	@GET
-	@Path("{modelId}")
+	@Path(KieMLResourceConstants.GET_MODEL)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response getModel(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
-			@PathParam("modelId") String modelId) {
+			@PathParam(KieMLResourceConstants.MODEL_ID_PARAM) String modelId) {
 		Variant v = getVariant(headers);
 		Header conversationIdHeader = buildConversationIdHeader(containerId, context, headers);
 		try {
@@ -89,11 +91,11 @@ public class KieMLResource {
 	}
 
 	@POST
-	@Path("{modelId}")
+	@Path(KieMLResourceConstants.PREDICTION)
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response predict(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam("id") String containerId,
-			@PathParam("modelId") String modelId, String inputPayload) {
+	public Response predict(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
+			@PathParam(KieMLResourceConstants.MODEL_ID_PARAM) String modelId, String inputPayload) {
 		Variant v = getVariant(headers);
 		String contentType = getContentType(headers);
 		Header conversationIdHeader = buildConversationIdHeader(containerId, context, headers);

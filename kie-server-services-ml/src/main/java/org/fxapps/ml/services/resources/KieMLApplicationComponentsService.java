@@ -1,10 +1,12 @@
-package org.fxapps.ml.services;
+package org.fxapps.ml.services.resources;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.fxapps.ml.services.KieMLExtension;
+import org.fxapps.ml.services.KieMLServicesBase;
 import org.kie.server.services.api.KieServerApplicationComponentsService;
 import org.kie.server.services.api.SupportedTransports;
 

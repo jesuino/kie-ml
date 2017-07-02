@@ -1,6 +1,7 @@
 package org.fxapps.ml.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,14 @@ public class KieMLExtension implements KieServerExtension {
     private static final Logger logger = LoggerFactory.getLogger(KieMLExtension.class);
     
     public static final String EXTENSION_NAME = "KieML";
+    
+    public static Class<?>[] ADDITIONAL_MARSHALLER_CLASSES = {
+			Model.class,
+			ModelList.class,
+			Input.class,
+			Prediction.class
+    };
+    
 
 	private KieMLServicesBase kieMLServicesBase;
 	private List<Object> services = new ArrayList<Object>();
@@ -49,10 +58,7 @@ public class KieMLExtension implements KieServerExtension {
 		try {
 			KieMLContainer kieMLContainer = KieMLContainer.newContainer(kieContainer);
 			Set<Class<?>> extraClasses = new HashSet<>();
-			extraClasses.add(Model.class);
-			extraClasses.add(ModelList.class);
-			extraClasses.add(Input.class);
-			extraClasses.add(Prediction.class);
+			extraClasses.addAll(Arrays.asList(ADDITIONAL_MARSHALLER_CLASSES));
 			kieContainerInstance.addExtraClasses(extraClasses);
 			logger.info("Container {} contains KieMLModels. Activating {}", id, this);
 			kieMLServicesBase.addContainer(id, kieMLContainer);
