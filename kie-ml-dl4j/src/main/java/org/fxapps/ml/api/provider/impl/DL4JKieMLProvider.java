@@ -22,7 +22,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
  * @author wsiqueir
  *
  */
-public class DL4JMLProvider implements MLProvider {
+public class DL4JKieMLProvider implements MLProvider {
 
 	public String getId() {
 		return "deeplearning4j";
