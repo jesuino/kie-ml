@@ -26,7 +26,7 @@ class KieMLServiceImpl implements KieMLService {
 	@Override
 	public Prediction predict(String modelId, Input input) {
 		Optional<Model> modelSearch = kc.modelsList().getModels().stream().filter(m -> m.getId().equals(modelId)).findFirst();
-		Model model = modelSearch.orElseThrow(() -> new IllegalArgumentException("Model " + modelId + "not found."));
+		Model model = modelSearch.orElseThrow(() -> new IllegalArgumentException("Model " + modelId + " not found."));
 		String providerId = model.getProvider();
 		return MLProviderFactory.getProvider(providerId).predict(kc, model, input);
 	}

@@ -66,7 +66,7 @@ class KieMLContainerImpl implements KieMLContainer {
 			JAXBContext context = JAXBContext.newInstance(Model.class, ModelList.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			models = (ModelList) unmarshaller.unmarshal(modelsIS);
-			models.getModels().forEach(m -> m.setLabels(loadLabelsForMode(m)));
+			models.getModels().stream().filter(m -> m.getModelLabelsPath() !=  null).forEach(m -> m.setLabels(loadLabelsForModel(m)));
 		} catch (JAXBException e) {
 			throw new IllegalArgumentException("Not able to unmarshall descriptor" + MODEL_DESCRIPTOR_PATH, e);
 		}
@@ -77,7 +77,7 @@ class KieMLContainerImpl implements KieMLContainer {
 		return this.kieMLService;
 	}
 
-	private List<String> loadLabelsForMode(Model m) {
+	private List<String> loadLabelsForModel(Model m) {
 		List<String> labels = new ArrayList<>();
 		InputStream isLabel = kieContainer.getClassLoader().getResourceAsStream(m.getModelLabelsPath());
 		BufferedReader reader = new BufferedReader(new InputStreamReader(isLabel));
