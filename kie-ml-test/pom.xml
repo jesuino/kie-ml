@@ -24,21 +24,26 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.fxapps.ml</groupId>
+			<artifactId>kie-server-ml-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- PROVIDERS -->
+		<dependency>
 			<groupId>org.fxapps.ml</groupId>
 			<artifactId>kie-ml-dl4j</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxapps.ml</groupId>
-			<artifactId>kie-server-ml-client</artifactId>
+			<artifactId>kie-ml-weka</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.6</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
