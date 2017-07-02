@@ -6,37 +6,26 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>kie-server-services-ml</artifactId>
-	<name>Kie Server Machile Learning Extension</name>
-	<description>A Machine extension to allow the execution of pre-trained modules inside Kie Server.</description>
+	<artifactId>kie-server-ml-client</artifactId>
+	<name>Kie Server Machile Learning Client</name>
+	<description>Java Client for Kie Server ML extension</description>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.fxapps.ml</groupId>
 			<artifactId>kie-ml-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kie.server</groupId>
-			<artifactId>kie-server-api</artifactId>
+			<artifactId>kie-server-client</artifactId>
 			<version>${kie.api.version}</version>
-			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.kie.server</groupId>
-			<artifactId>kie-server-services-common</artifactId>
-			<version>${kie.api.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.kie.server</groupId>
-			<artifactId>kie-server-rest-common</artifactId>
-			<version>${kie.api.version}</version>
-			<scope>provided</scope>
-		</dependency>
+
 	</dependencies>
 </project>

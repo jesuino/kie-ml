@@ -10,12 +10,14 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<kie.api.version>6.5.0.Final</kie.api.version>
 	</properties>
 
 	<modules>
 		<module>kie-ml-api</module>
 		<module>kie-server-services-ml</module>
+		<module>kie-server-ml-client</module>
 		<module>kie-ml-dl4j</module>
 		<module>kie-ml-test-models</module>
 		<module>kie-ml-test</module>

@@ -27,13 +27,19 @@ public class KieMLExtension implements KieServerExtension {
     private static final Logger logger = LoggerFactory.getLogger(KieMLExtension.class);
     
     public static final String EXTENSION_NAME = "KieML";
+
+	public static final String CAPABILITY_NAME = EXTENSION_NAME + "Capability";
     
-    public static Class<?>[] ADDITIONAL_MARSHALLER_CLASSES = {
-			Model.class,
-			ModelList.class,
-			Input.class,
-			Prediction.class
-    };
+    public static Class<?>[] ADDITIONAL_MARSHALLER_CLASSES;
+    
+    static {
+    	ADDITIONAL_MARSHALLER_CLASSES  = new Class<?>[]{
+				Model.class,
+				ModelList.class,
+				Input.class,
+				Prediction.class
+	    };
+    }
     
 
 	private KieMLServicesBase kieMLServicesBase;
@@ -103,7 +109,7 @@ public class KieMLExtension implements KieServerExtension {
 	}
 
 	public String getImplementedCapability() {
-		return EXTENSION_NAME + "Capability";
+		return CAPABILITY_NAME;
 	}
 
 	public List<Object> getServices() {

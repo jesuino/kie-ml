@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Variant;
 
+import org.fxapps.ml.api.KieMLConstants;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
@@ -30,7 +31,7 @@ import org.kie.server.services.impl.marshal.MarshallerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path(KieMLResourceConstants.BASE)
+@Path("server/" + KieMLConstants.URI_BASE)
 public class KieMLResource {
 	public static final Logger logger = LoggerFactory.getLogger(KieMLResource.class);
 
@@ -46,7 +47,7 @@ public class KieMLResource {
 	}
 
 	@GET
-	@Path(KieMLResourceConstants.GET_MODELS)
+	@Path(KieMLConstants.URI_GET_MODELS)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response getModels(@javax.ws.rs.core.Context HttpHeaders headers,
 			@PathParam(CONTAINER_ID) String containerId) {
@@ -69,10 +70,10 @@ public class KieMLResource {
 	}
 
 	@GET
-	@Path(KieMLResourceConstants.GET_MODEL)
+	@Path(KieMLConstants.URI_GET_MODEL)
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response getModel(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
-			@PathParam(KieMLResourceConstants.MODEL_ID_PARAM) String modelId) {
+			@PathParam(KieMLConstants.PARAM_MODEL_ID) String modelId) {
 		Variant v = getVariant(headers);
 		Header conversationIdHeader = buildConversationIdHeader(containerId, context, headers);
 		try {
@@ -91,11 +92,11 @@ public class KieMLResource {
 	}
 
 	@POST
-	@Path(KieMLResourceConstants.PREDICTION)
+	@Path(KieMLConstants.URI_PREDICTION)
 	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response predict(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
-			@PathParam(KieMLResourceConstants.MODEL_ID_PARAM) String modelId, String inputPayload) {
+			@PathParam(KieMLConstants.PARAM_MODEL_ID) String modelId, String inputPayload) {
 		Variant v = getVariant(headers);
 		String contentType = getContentType(headers);
 		Header conversationIdHeader = buildConversationIdHeader(containerId, context, headers);
