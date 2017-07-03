@@ -1,15 +1,20 @@
 package org.fxapps.ml.api.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "param")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class TransformParam {
+@XmlRootElement(name = "modelParam")
+public class ModelParam {
 
 	private String name;
 	private String value;
+
+	public ModelParam() {
+	}
+
+	public ModelParam(String name, String value) {
+		this.name = name;
+		this.value = value;
+	}
 
 	public String getName() {
 		return name;
@@ -29,7 +34,7 @@ public class TransformParam {
 
 	@Override
 	public String toString() {
-		return "TransformParam [name=" + name + ", value=" + value + "]";
+		return "ModelParam [name=" + name + ", value=" + value + "]";
 	}
 	
 }

@@ -7,21 +7,22 @@
 		<provider>deeplearning4j</provider>
 		<modelBinPath>models/minist-model.zip</modelBinPath>
 		<modelLabelsPath>labels/mnist_labels.txt</modelLabelsPath>
-		<transformDescriptor>
-			<name>ImageTransformer</name>
-			<param>
-				<name>height</name>
-				<value>28</value>
-			</param>
-			<param>
-				<name>width</name>
-				<value>28</value>
-			</param>
-			<param>
-				<name>channels</name>
-				<value>1</value>
-			</param>
-		</transformDescriptor>
+		<modelParam>
+			<name>transformerName</name>
+			<value>ImageTransformer</value>
+		</modelParam>
+		<modelParam>
+			<name>height</name>
+			<value>28</value>
+		</modelParam>
+		<modelParam>
+			<name>width</name>
+			<value>28</value>
+		</modelParam>
+		<modelParam>
+			<name>channels</name>
+			<value>1</value>
+		</modelParam>
 	</model>
 	<model>
 		<id>iris2d</id>
@@ -30,12 +31,9 @@
 		</description>
 		<provider>weka</provider>
 		<modelBinPath>models/iris2DJ48.bin</modelBinPath>
-		<transformDescriptor>
-			<name>ClassIndexSet</name>
-			<param>
-				<name>classIndex</name>
-				<value>2</value>
-			</param>
-		</transformDescriptor>
+		<modelParam>
+			<name>classIndex</name>
+			<value>2</value>
+		</modelParam>
 	</model>
 </models>

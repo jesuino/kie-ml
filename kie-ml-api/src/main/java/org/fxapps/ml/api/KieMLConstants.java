@@ -3,7 +3,7 @@ package org.fxapps.ml.api;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 
 // move it from here?
 public class KieMLConstants {
@@ -15,7 +15,7 @@ public class KieMLConstants {
 				Model.class,
 				ModelList.class,
 				Input.class,
-				Prediction.class
+				Result.class
 	    };
     }
 

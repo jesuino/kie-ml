@@ -2,15 +2,20 @@ package org.fxapps.ml.api.model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * 
  * The object representation for a model description
+ * 
  * @author wsiqueir
  *
  */
 @XmlRootElement(name = "model")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Model {
 
 	private String id;
@@ -19,7 +24,8 @@ public class Model {
 	private String modelBinPath;
 	private String modelLabelsPath;
 	private List<String> labels;
-	private TransformDescriptor transformDescriptor;
+	@XmlElement(name="modelParam")
+	private List<ModelParam> params;
 	
 	public String getId() {
 		return id;
@@ -69,18 +75,18 @@ public class Model {
 		this.labels = labels;
 	}
 	
-	public TransformDescriptor getTransformDescriptor() {
-		return transformDescriptor;
+	public List<ModelParam> getParams() {
+		return params;
 	}
 
-	public void setTransformDescriptor(TransformDescriptor transformDescriptor) {
-		this.transformDescriptor = transformDescriptor;
+	public void setParams(List<ModelParam> params) {
+		this.params = params;
 	}
 
 	@Override
 	public String toString() {
 		return "Model [id=" + id + ", name=" + name + ", provider=" + provider + ", modelBinPath=" + modelBinPath
-				+ ", modelLabelsPath=" + modelLabelsPath + "]";
+				+ ", modelLabelsPath=" + modelLabelsPath + ", labels=" + labels + ", params=" + params + "]";
 	}
 	
 }

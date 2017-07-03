@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 import org.fxapps.ml.api.model.Input;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.runtime.KieMLContainer;
 
 public class WekaManualTest {
@@ -21,7 +21,7 @@ public class WekaManualTest {
         }
 		System.out.println("Sending data:" + arffContent);
 		Input input = new Input(null, arffContent, null);
-		Prediction prediction = KieMLContainer.newContainer(GAV).getService().predict("iris2d", input);
+		Result prediction = KieMLContainer.newContainer(GAV).getService().predict("iris2d", input);
 		System.out.println("PRedictions:" + prediction.getPredictions());
 	}
 	

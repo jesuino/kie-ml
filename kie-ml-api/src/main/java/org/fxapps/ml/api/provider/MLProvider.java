@@ -2,7 +2,7 @@ package org.fxapps.ml.api.provider;
 
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.runtime.KieMLContainer;
 
 /**
@@ -31,6 +31,6 @@ public interface MLProvider {
 	 * @param input
 	 * @return
 	 */
-	public Prediction predict(KieMLContainer kc, Model model, Input input);
+	public Result run(KieMLContainer kc, Model model, Input input);
 
 }

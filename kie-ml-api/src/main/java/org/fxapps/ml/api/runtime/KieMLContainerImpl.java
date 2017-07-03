@@ -14,6 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import org.drools.compiler.kproject.ReleaseIdImpl;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
+import org.fxapps.ml.api.model.ModelParam;
 import org.fxapps.ml.api.service.KieMLService;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
@@ -63,7 +64,7 @@ class KieMLContainerImpl implements KieMLContainer {
 			throw new IllegalArgumentException("Not able to read descriptor" + MODEL_DESCRIPTOR_PATH);
 		}
 		try {
-			JAXBContext context = JAXBContext.newInstance(Model.class, ModelList.class);
+			JAXBContext context = JAXBContext.newInstance(Model.class, ModelList.class, ModelParam.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			models = (ModelList) unmarshaller.unmarshal(modelsIS);
 			models.getModels().stream().filter(m -> m.getModelLabelsPath() !=  null).forEach(m -> m.setLabels(loadLabelsForModel(m)));
