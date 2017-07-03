@@ -74,9 +74,43 @@ Once it is created, retrieve the container information using `curl -u 'kieserver
 </response>
 ~~~
 
-Now that the container is created we can see all the models installed on it. At the time of this writing, the test container only had the model for mnist images (but it will change soon), see the response for XXX:
+Now that the container is created we can see all the models installed on it. At the time of this writing, the test container only had the model for mnist images (but it will change soon), see the response for `curl -u 'kieserver:kieserver1!'  http://localhost:8080/rest/server/containers/test/kieml/mnist`:
 ~~~
-
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response type="SUCCESS" msg="Found model">
+    <task-reassignment-list xsi:type="model" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <id>mnist</id>
+        <labels>0</labels>
+        <labels>1</labels>
+        <labels>2</labels>
+        <labels>3</labels>
+        <labels>4</labels>
+        <labels>5</labels>
+        <labels>6</labels>
+        <labels>7</labels>
+        <labels>8</labels>
+        <labels>9</labels>
+        <modelBinPath>models/minist-model.zip</modelBinPath>
+        <modelLabelsPath>labels/mnist_labels.txt</modelLabelsPath>
+        <name>MNIST digit recognition</name>
+        <provider>deeplearning4j</provider>
+        <transformDescriptor>
+            <name>ImageTransformer</name>
+            <param>
+                <name>height</name>
+                <value>28</value>
+            </param>
+            <param>
+                <name>width</name>
+                <value>28</value>
+            </param>
+            <param>
+                <name>channels</name>
+                <value>1</value>
+            </param>
+        </transformDescriptor>
+    </task-reassignment-list>
+</response>
 ~~~
 
 ### Running your model
