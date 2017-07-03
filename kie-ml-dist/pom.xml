@@ -1,69 +1,173 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>org.fxapps.ml</groupId>
-		<artifactId>kie-ml-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fxapps.ml</groupId>
 	<artifactId>kie-ml-dist</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Kie ML Dist</name>
 	<description>Create the JARs to be placed on Kie Server</description>
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
+		<version.wildfly-swarm>2017.6.1</version.wildfly-swarm>
+
+		<version.h2>1.4.187</version.h2>
+		<version.postgresql>9.4.1207</version.postgresql>
+		<version.mysql>5.1.38</version.mysql>
+
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<version.org.kie>7.0.0.Final</version.org.kie>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<!-- TODO: organize dependencies on a parent pom -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.wildfly.swarm</groupId>
+				<artifactId>bom</artifactId>
+				<version>${version.wildfly-swarm}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.fxapps.ml</groupId>
-			<artifactId>kie-ml-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.apache.maven.wagon</groupId>
+			<artifactId>wagon-provider-api</artifactId>
+			<version>2.1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.fxapps.ml</groupId>
-			<artifactId>kie-ml-dl4j</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.0.22</version>
 		</dependency>
 		<dependency>
-			<groupId>org.fxapps.ml</groupId>
-			<artifactId>kie-ml-weka</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.kie.server</groupId>
+			<artifactId>kie-server-services-common</artifactId>
+			<version>${version.org.kie}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>dom4j</groupId>
+					<artifactId>dom4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>javax.servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.spec.javax.security.jacc</groupId>
+					<artifactId>jboss-jacc-api_1.4_spec</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jaxrs-api</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>resteasy-jaxrs</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>resteasy-jaxb-provider</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.kie.server</groupId>
+			<artifactId>kie-server-rest-common</artifactId>
+			<version>${version.org.kie}</version>
+		</dependency>
+
+		<!-- our project version -->
 		<dependency>
 			<groupId>org.fxapps.ml</groupId>
 			<artifactId>kie-server-services-ml</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+
+		<!-- wildfly swarm dependencies -->
+		<dependency>
+			<groupId>org.wildfly.swarm</groupId>
+			<artifactId>logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly.swarm</groupId>
+			<artifactId>jaxrs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly.swarm</groupId>
+			<artifactId>security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wildfly.swarm</groupId>
+			<artifactId>undertow</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
-
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.0.1</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
-							<excludeScope>provided</excludeScope>
-							<includeScope>runtime</includeScope>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<excludeScope>provided</excludeScope>
-				</configuration>
-			</plugin>
-		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
+
+	<profiles>
+		<!-- default profile for Drools without persistence -->
+		<profile>
+			<id>BRM</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+				<plugins>
+					<plugin>
+						<groupId>org.wildfly.swarm</groupId>
+						<artifactId>wildfly-swarm-plugin</artifactId>
+						<version>${version.wildfly-swarm}</version>
+						<configuration>
+							<mainClass>org.kie.server.swarm.brm.KieServerMain</mainClass>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>package</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.5.1</version>
+						<configuration>
+							<source>${maven.compiler.source}</source>
+							<target>${maven.compiler.target}</target>
+							<excludes>
+								<exclude>org/kie/server/swarm/bpm/*.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
 </project>
