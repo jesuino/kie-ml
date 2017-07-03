@@ -14,6 +14,7 @@ It will take a while since it will download more then 400 dependencies, but afte
 
 ## Running
 
+Our distribution uses a Wildfly Swarm to run our extension on top of Kie Server (based on [Maciej's example](http://mswiderski.blogspot.com.br/2016/03/are-you-ready-to-dive-into-wildfly-swarm.html) ).:
 ~~~
 $ cd kie-ml-dist
 $ mvn clean install | java -Dorg.kie.server.id=swarm-kie-server -Dorg.kie.server.location=http://localhost:8080/server -jar target/kie-ml-dist-0.0.1-SNAPSHOT-swarm.jar
@@ -40,7 +41,7 @@ Once the server is running, go to the following URL: `http://localhost:8080/rest
 </response>
 ~~~
 
-## Creating your first container
+### Creating your first container
 
 We prepared a test container that contains a few models. Go to kie-ml-test-models and run `mvn clean install` then you should be able to create a container using the following cURL command:
 ~~~
@@ -73,3 +74,70 @@ Once it is created, retrieve the container information using `curl -u 'kieserver
 </response>
 ~~~
 
+Now that the container is created we can see all the models installed on it. At the time of this writing, the test container only had the model for mnist images (but it will change soon), see the response for XXX:
+~~~
+
+~~~
+
+### Running your model
+
+We have a container running on Kie Server, but now it is time to make an actual prediction. Let's try our mnist trained model. We have mnist on the WEB, but our model was trained against minist with black background, hence on this github we can find a few test images. Here's the request we should make:
+
+~~~
+curl -X POST -u 'kieserver:kieserver1!' -H 'Content-type: application/xml' --data '<input><url>https://raw.githubusercontent.com/gskielian/JPG-PNG-to-MNIST-NN-Format/master/training-images/1/im10007.png</url></input>' http://localhost:8080/rest/server/containers/test/kieml/mnist
+~~~
+
+And this should return the following XML:
+
+~~~
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response type="SUCCESS" msg="Success Running prediction">
+    <query-definitions xsi:type="prediction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <predictions>
+            <entry>
+                <key>0</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>1</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">1.0</value>
+            </entry>
+            <entry>
+                <key>2</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>3</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>4</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>5</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>6</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>7</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>8</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+            <entry>
+                <key>9</key>
+                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
+            </entry>
+        </predictions>
+        <predictionsResult>[0.00, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]</predictionsResult>
+    </query-definitions>
+</response>
+~~~
+
+As you can see on *predictionsResult* it classified the image as being an 1.
