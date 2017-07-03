@@ -128,5 +128,10 @@ public class KieMLExtension implements KieServerExtension {
     public String toString() {
         return EXTENSION_NAME + " KIE Server extension";
     }
+
+	@Override
+	public boolean isInitialized() {
+		return true;
+	}
  
 }

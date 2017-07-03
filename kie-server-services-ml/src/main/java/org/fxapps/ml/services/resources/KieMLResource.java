@@ -43,6 +43,7 @@ public class KieMLResource {
 	public KieMLResource(KieMLServicesBase kieMLServicesBase) {
 		this.kieMLServicesBase = kieMLServicesBase;
 		this.context = kieMLServicesBase.getContext();
+		context.getContainers().forEach(c -> c.getResource().getReleaseId());
 		this.marshallerHelper = new MarshallerHelper(context);
 	}
 
@@ -66,7 +67,6 @@ public class KieMLResource {
 			return internalServerError("Unexpected error retrieving model list: " + e.getMessage(), v,
 					conversationIdHeader);
 		}
-
 	}
 
 	@GET
