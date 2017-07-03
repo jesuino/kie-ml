@@ -32,11 +32,11 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.maven.wagon</groupId>
-			<artifactId>wagon-provider-api</artifactId>
-			<version>2.1.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.maven.wagon</groupId> -->
+<!-- 			<artifactId>wagon-provider-api</artifactId> -->
+<!-- 			<version>2.1</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.codehaus.plexus</groupId>
 			<artifactId>plexus-utils</artifactId>
@@ -124,12 +124,24 @@
 	</build>
 
 	<profiles>
-		<!-- default profile for Drools without persistence -->
+		<!-- default profile with all the providers. TODO: create a profile per provider-->
 		<profile>
-			<id>BRM</id>
+			<id>FULL</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<dependencies>
+<!-- 				<dependency> -->
+<!-- 					<groupId>org.fxapps.ml</groupId> -->
+<!-- 					<artifactId>kie-ml-dl4j</artifactId> -->
+<!-- 					<version>0.0.1-SNAPSHOT</version> -->
+<!-- 				</dependency> -->
+<!-- 				<dependency> -->
+<!-- 					<groupId>org.fxapps.ml</groupId> -->
+<!-- 					<artifactId>kie-ml-weka</artifactId> -->
+<!-- 					<version>0.0.1-SNAPSHOT</version> -->
+<!-- 				</dependency> -->
+			</dependencies>
 			<build>
 				<resources>
 					<resource>
