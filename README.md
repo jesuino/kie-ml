@@ -39,3 +39,37 @@ Once the server is running, go to the following URL: `http://localhost:8080/rest
     </kie-server-info>
 </response>
 ~~~
+
+## Creating your first container
+
+We prepared a test container that contains a few models. Go to kie-ml-test-models and run `mvn clean install` then you should be able to create a container using the following cURL command:
+~~~
+curl -X PUT -H 'Content-type: application/xml' -u 'kieserver:kieserver1!' --data '<kie-container container-id="test"><release-id><artifact-id>kie-ml-test-models</artifact-id><group-id>org.fxapps.ml</group-id><version>0.0.1-SNAPSHOT</version></release-id></kie-container>' http://localhost:8080/rest/server/containers/test
+~~~
+
+Once it is created, retrieve the container information using `curl -u 'kieserver:kieserver1!' http://localhost:8080/rest/server/containers/test`. The response should be:
+
+~~~
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response type="SUCCESS" msg="Info for container test">
+    <kie-container container-id="test" status="STARTED">
+        <messages>
+            <content>Container test successfully created with module org.fxapps.ml:kie-ml-test-models:0.0.1-SNAPSHOT.</content>
+            <severity>INFO</severity>
+            <timestamp>2017-07-03T12:11:36.250-03:00</timestamp>
+        </messages>
+        <release-id>
+            <artifact-id>kie-ml-test-models</artifact-id>
+            <group-id>org.fxapps.ml</group-id>
+            <version>0.0.1-SNAPSHOT</version>
+        </release-id>
+        <resolved-release-id>
+            <artifact-id>kie-ml-test-models</artifact-id>
+            <group-id>org.fxapps.ml</group-id>
+            <version>0.0.1-SNAPSHOT</version>
+        </resolved-release-id>
+        <scanner status="DISPOSED"/>
+    </kie-container>
+</response>
+~~~
+
