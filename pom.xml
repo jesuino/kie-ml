@@ -11,7 +11,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<kie.api.version>6.5.0.Final</kie.api.version>
+		<kie.api.version>7.0.0.Final</kie.api.version>
 	</properties>
 
 	<modules>
