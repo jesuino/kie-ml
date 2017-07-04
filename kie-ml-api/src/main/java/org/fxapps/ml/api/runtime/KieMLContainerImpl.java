@@ -99,4 +99,10 @@ class KieMLContainerImpl implements KieMLContainer {
 		return labels;
 	}
 
+	@Override
+	public InputStream getModelBinInputStream(Model model) {
+		ClassLoader cl =  kieContainer.getClassLoader();
+		return cl.getResourceAsStream(model.getModelBinPath());
+	}
+
 }

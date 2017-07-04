@@ -37,6 +37,5 @@ public class Result {
 	public void setResultTxt(String resultTxt) {
 		this.resultTxt = resultTxt;
 	}
-
 	
 }

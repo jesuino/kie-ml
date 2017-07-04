@@ -1,5 +1,8 @@
 package org.fxapps.ml.api.runtime;
 
+import java.io.InputStream;
+
+import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
 import org.fxapps.ml.api.service.KieMLService;
 import org.kie.api.builder.ReleaseId;
@@ -12,6 +15,8 @@ public interface KieMLContainer {
 	public ModelList modelsList();
 	
 	public KieContainer getKieContainer();
+	
+	public InputStream getModelBinInputStream(Model model);
 	
 	public static KieMLContainer newContainer(String GAV) {
 		return new KieMLContainerImpl(GAV);
