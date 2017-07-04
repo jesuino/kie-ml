@@ -162,7 +162,7 @@
 						<artifactId>wildfly-swarm-plugin</artifactId>
 						<version>${version.wildfly-swarm}</version>
 						<configuration>
-							<mainClass>org.kie.server.swarm.brm.KieServerMain</mainClass>
+							<mainClass>org.kie.server.swarm.ml.KieServerMain</mainClass>
 						</configuration>
 						<executions>
 							<execution>

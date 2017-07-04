@@ -3,11 +3,8 @@ package org.kie.server.swarm;
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Function;
 
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.kie.server.api.KieServerConstants;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieContainerStatus;
@@ -21,12 +18,10 @@ import org.wildfly.swarm.config.security.security_domain.ClassicAuthentication;
 import org.wildfly.swarm.config.security.security_domain.authentication.LoginModule;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.security.SecurityFraction;
-import org.wildfly.swarm.undertow.WARArchive;
 
 public abstract class AbstractKieServerMain {
     
     private static String configFolder = System.getProperty("org.kie.server.swarm.conf", "src/main/config");
-    private static String webFolder = "src/main/webapp";
 
     protected static void installKJars(String[] args) {
         

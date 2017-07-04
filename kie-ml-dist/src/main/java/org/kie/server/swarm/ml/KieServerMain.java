@@ -1,4 +1,4 @@
-package org.kie.server.swarm.brm;
+package org.kie.server.swarm.ml;
 
 
 import java.util.Arrays;
