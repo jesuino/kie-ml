@@ -78,6 +78,22 @@ class KieMLContainerImpl implements KieMLContainer {
 		return this.kieMLService;
 	}
 
+	// should these methods be in a separated utility class?
+	
+	@Override
+	public InputStream getModelBinInputStream(Model model) {
+		ClassLoader cl =  kieContainer.getClassLoader();
+		return cl.getResourceAsStream(model.getModelBinPath());
+	}
+
+	@Override
+	public String getParamValue(Model model, String paramName, boolean isRequired) {
+		return model.getParams().stream()
+				.filter(p -> p.getName().equals("model"))
+				.map(ModelParam::getValue).findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("Parameter '"+ paramName +"' is required."));
+	}
+		
 	private List<String> loadLabelsForModel(Model m) {
 		List<String> labels = new ArrayList<>();
 		InputStream isLabel = kieContainer.getClassLoader().getResourceAsStream(m.getModelLabelsPath());
@@ -97,12 +113,6 @@ class KieMLContainerImpl implements KieMLContainer {
 			}
 		}
 		return labels;
-	}
-
-	@Override
-	public InputStream getModelBinInputStream(Model model) {
-		ClassLoader cl =  kieContainer.getClassLoader();
-		return cl.getResourceAsStream(model.getModelBinPath());
 	}
 
 }

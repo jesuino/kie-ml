@@ -18,6 +18,8 @@ public interface KieMLContainer {
 	
 	public InputStream getModelBinInputStream(Model model);
 	
+	public String getParamValue(Model model, String paramName, boolean isRequired);
+	
 	public static KieMLContainer newContainer(String GAV) {
 		return new KieMLContainerImpl(GAV);
 	}

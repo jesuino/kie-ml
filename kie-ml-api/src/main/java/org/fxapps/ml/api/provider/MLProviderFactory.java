@@ -2,6 +2,9 @@ package org.fxapps.ml.api.provider;
 
 import java.util.ServiceLoader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 
  * SPI implementation to plug new providers
@@ -11,17 +14,14 @@ import java.util.ServiceLoader;
  */
 public class MLProviderFactory {
 
+	static Logger logger = LoggerFactory.getLogger(MLProviderFactory.class);
+	
 	private static ServiceLoader<MLProvider> providers = ServiceLoader.load(MLProvider.class);
-	
+
 	static {
-		try {
-			registerProviders();
-		} catch (Exception e) {
-			e.printStackTrace();
+		for (MLProvider mlProvider : providers) {
+			logger.info("Registered provider {}", mlProvider);
 		}
-	}
-	
-	public static void registerProviders() throws Exception {
 	}
 
 	public static ServiceLoader<MLProvider> getProviders() {
@@ -31,12 +31,12 @@ public class MLProviderFactory {
 	public static MLProvider getProvider(String providerName) {
 		MLProvider provider = null;
 		for (MLProvider p : providers) {
-			if(p.getId().equals(providerName)){
+			if (p.getId().equals(providerName)) {
 				provider = p;
 			}
 		}
-		if(provider == null) {
-			 throw new IllegalArgumentException("Provider " + provider + " not found");
+		if (provider == null) {
+			throw new IllegalArgumentException("Provider " + provider + " not found");
 		}
 		return provider;
 	}

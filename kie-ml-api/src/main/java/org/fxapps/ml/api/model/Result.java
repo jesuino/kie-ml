@@ -38,4 +38,10 @@ public class Result {
 		this.resultTxt = resultTxt;
 	}
 	
+	@Override
+	public String toString() {
+		return "Result [predictions=" + predictions + ", predictionsResult=" + predictionsResult + ", resultTxt="
+				+ resultTxt + "]";
+	}
+	
 }
