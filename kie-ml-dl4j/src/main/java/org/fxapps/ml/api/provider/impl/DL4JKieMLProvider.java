@@ -41,9 +41,8 @@ public class DL4JKieMLProvider implements MLProvider {
 					.stream().filter(p -> p.getName().equals("transformerName")).map(ModelParam::getValue)
 					.findFirst().orElseThrow(() -> new IllegalArgumentException("Argument transformerName is required!"));
 			Transformer transformer = TransformerFactory.get(transformerName);
-			ClassLoader cl = kc.getKieContainer().getClassLoader();
-			InputStream isModel = cl.getResourceAsStream(model.getModelBinPath());
 			INDArray image = transformer.transform(params, input);
+			InputStream isModel = kc.getModelBinInputStream(model);
 			MultiLayerNetwork dl4jModel = ModelSerializer.restoreMultiLayerNetwork(isModel);
 			INDArray output = dl4jModel.output(image);
 			prediction = new Result();
