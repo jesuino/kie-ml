@@ -138,6 +138,11 @@
 						</exclusion>
 					</exclusions>
 				</dependency>
+				<dependency>
+					<groupId>org.fxapps.ml</groupId>
+					<artifactId>kie-ml-opennlp</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
 				<!-- <dependency> -->
 				<!-- <groupId>org.fxapps.ml</groupId> -->
 				<!-- <artifactId>kie-ml-weka</artifactId> -->

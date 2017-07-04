@@ -23,6 +23,8 @@ public class KieServerMLClientTest {
 
 	private static final String CONTAINER_ID = "test";
 	private static final String GAV = "org.fxapps.ml:kie-ml-test-models:0.0.1-SNAPSHOT";
+	static String SENTENCE = "Peter and John went to the library at 8:00 PM, July 10th.";
+
 
 	public static void main(String[] args) throws IOException {
 		KieServicesConfiguration configuration = KieServicesFactory
@@ -33,15 +35,16 @@ public class KieServerMLClientTest {
 		configuration.addExtraClasses(classes);
 		KieServicesClient client = KieServicesFactory.newKieServicesClient(configuration);
 		
-		client.listContainers().getResult().getContainers().stream().filter(c -> c.getContainerId().equals(CONTAINER_ID)).findFirst().orElse(createContainer(client));
-		
-		
+		client.listContainers().getResult().getContainers().stream()
+			.filter(c -> c.getContainerId().equals(CONTAINER_ID))
+			.findFirst().ifPresent(c -> client.disposeContainer(CONTAINER_ID));
+		createContainer(client);
+		Input input = new Input("file:/home/wsiqueir/MNIST/mnist_png/testing/2/174.png");
 		KieServerMLClient mlClient = client.getServicesClient(KieServerMLClient.class);
 		System.out.println(mlClient.getModelList(CONTAINER_ID).getResult());
 		System.out.println(mlClient.getModel(CONTAINER_ID, "mnist").getResult());
-		Input input = new Input("file:/home/wsiqueir/MNIST/mnist_png/testing/2/174.png");
 		System.out.println(mlClient.predict(CONTAINER_ID, "mnist", input).getResult().getPredictions());
-//		
+		
 //		InputStream is = KieServerMLClientTest.class.getResource("/data/iris2d_test_data.arff").openStream();
 //		String arffContent = null;
 //		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
@@ -51,6 +54,15 @@ public class KieServerMLClientTest {
 //		System.out.println(mlClient.getModel(CONTAINER_ID, "iris2d").getResult());
 //		Input input2 = new Input(null, arffContent, null);
 //		System.out.println(mlClient.predict(CONTAINER_ID, "iris2d", input2).getResult().getPredictions());
+		
+		
+		input = new Input(null, SENTENCE, null);
+		System.out.println(mlClient.predict(CONTAINER_ID, "datePos", input).getResult().getPredictionsResult());
+		System.out.println(mlClient.predict(CONTAINER_ID, "timePos", input).getResult().getPredictionsResult());
+		System.out.println(mlClient.predict(CONTAINER_ID, "namePos", input).getResult().getPredictionsResult());
+		System.out.println(mlClient.predict(CONTAINER_ID, "tagger", input).getResult().getPredictionsResult());
+		System.out.println(mlClient.predict(CONTAINER_ID, "parser", input).getResult());
+		
 		client.disposeContainer(CONTAINER_ID);
 
 	}

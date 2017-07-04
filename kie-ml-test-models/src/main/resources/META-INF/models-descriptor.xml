@@ -36,4 +36,100 @@
 			<value>2</value>
 		</modelParam>
 	</model>
+	<model>
+		<id>datePos</id>
+		<name>Find date position</name>
+		<description>Find date position on a sentence using OpenNLP
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-ner-date.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>NameFinder</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>locationPos</id>
+		<name>Find location position</name>
+		<description>Find location position on a sentence using OpenNLP
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-ner-location.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>NameFinder</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>moneyPos</id>
+		<name>Find money position</name>
+		<description>Find money position on a sentence using OpenNLP
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-ner-money.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>NameFinder</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>organizationPos</id>
+		<name>Find organization position</name>
+		<description>Find org position on a sentence using OpenNLP
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-ner-organization.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>NameFinder</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>namePos</id>
+		<name>Find person name position</name>
+		<description>Find person name position on a sentence using OpenNLP
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-ner-person.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>NameFinder</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>timePos</id>
+		<name>Find time position</name>
+		<description>Find time position on a sentence using OpenNLP
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-ner-time.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>NameFinder</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>parser</id>
+		<name>Parse text</name>
+		<description>Parse text
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-parser-chunking.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>Parser</value>
+		</modelParam>
+	</model>
+	<model>
+		<id>tagger</id>
+		<name>Tag text tokens</name>
+		<description>Parse text
+		</description>
+		<provider>opennlp</provider>
+		<modelBinPath>models/opennlp/en-pos-maxent.bin</modelBinPath>
+		<modelParam>
+			<name>model</name>
+			<value>Tagger</value>
+		</modelParam>
+	</model>
 </models>
