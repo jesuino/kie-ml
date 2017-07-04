@@ -10,7 +10,7 @@ import java.util.Set;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.runtime.KieMLContainer;
 import org.kie.api.runtime.KieContainer;
 import org.kie.server.services.api.KieContainerInstance;
@@ -37,7 +37,7 @@ public class KieMLExtension implements KieServerExtension {
 				Model.class,
 				ModelList.class,
 				Input.class,
-				Prediction.class
+				Result.class
 	    };
     }
     

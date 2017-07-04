@@ -11,11 +11,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author wsiqueir
  *
  */
-@XmlRootElement(name = "prediction")
-public class Prediction {
+@XmlRootElement(name = "model-execution-result")
+public class Result {
 	
 	private Map<String, Number> predictions;
 	private String predictionsResult;
+	private String resultTxt;
 	
 	public Map<String, Number> getPredictions() {
 		return predictions;
@@ -29,5 +30,13 @@ public class Prediction {
 	public void setPredictionsResult(String predictionsResult) {
 		this.predictionsResult = predictionsResult;
 	}
+	
+	public String getResultTxt() {
+		return resultTxt;
+	}
+	public void setResultTxt(String resultTxt) {
+		this.resultTxt = resultTxt;
+	}
 
+	
 }

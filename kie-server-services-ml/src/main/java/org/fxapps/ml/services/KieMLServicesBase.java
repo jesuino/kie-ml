@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.runtime.KieMLContainer;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.ServiceResponse.ResponseType;
@@ -23,11 +23,11 @@ public class KieMLServicesBase {
 		this.context = context;
 	}
 
-	public ServiceResponse<Prediction> predict(String containerId, String modelId, Input input) {
+	public ServiceResponse<Result> predict(String containerId, String modelId, Input input) {
 		checkContainer(containerId);
 		KieMLContainer kieMLContainer = containers.get(containerId);
-		Prediction predict = kieMLContainer.getService().predict(modelId, input);
-		return new ServiceResponse<Prediction>(ResponseType.SUCCESS, "Success Running prediction", predict);
+		Result predict = kieMLContainer.getService().predict(modelId, input);
+		return new ServiceResponse<Result>(ResponseType.SUCCESS, "Success Running prediction", predict);
 	}
 
 	public ServiceResponse<ModelList> getModels(String containerId) {

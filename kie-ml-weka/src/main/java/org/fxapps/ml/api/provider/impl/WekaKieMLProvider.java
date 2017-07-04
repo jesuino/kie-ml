@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.provider.MLProvider;
 import org.fxapps.ml.api.runtime.KieMLContainer;
 
@@ -32,8 +32,8 @@ public class WekaKieMLProvider implements MLProvider {
 		return "weka";
 	}
 
-	public Prediction predict(KieMLContainer kc, Model model, Input input) {
-		Prediction prediction = new Prediction();
+	public Result run(KieMLContainer kc, Model model, Input input) {
+		Result prediction = new Result();
 		prediction.setPredictions(new HashMap<>());
 		try {
 			ClassLoader cl = kc.getKieContainer().getClassLoader();
@@ -70,8 +70,8 @@ public class WekaKieMLProvider implements MLProvider {
 
 	private int getClassIndex(Model model, int size) {
 		int defaultValue = size - 1;
-		if (model.getTransformDescriptor() != null && model.getTransformDescriptor().getParams() != null) {
-			return model.getTransformDescriptor().getParams().stream().filter(p -> p.getName().equals("classIndex"))
+		if (model.getParams() != null) {
+			return model.getParams().stream().filter(p -> p.getName().equals("classIndex"))
 					.map(p -> Integer.parseInt(p.getValue())).findFirst().orElseGet(() -> defaultValue);
 		} else {
 			return defaultValue;

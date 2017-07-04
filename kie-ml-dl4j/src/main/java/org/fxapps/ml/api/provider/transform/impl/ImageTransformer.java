@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.datavec.image.loader.NativeImageLoader;
 import org.fxapps.ml.api.model.Input;
-import org.fxapps.ml.api.model.TransformParam;
+import org.fxapps.ml.api.model.ModelParam;
 import org.fxapps.ml.api.provider.transform.Transformer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
@@ -19,7 +19,7 @@ public class ImageTransformer implements Transformer {
 	}
 
 	@Override
-	public INDArray transform(List<TransformParam> params, Input input) {
+	public INDArray transform(List<ModelParam> params, Input input) {
 		
 		int height = getIntParam(params, "height");
 		int width = getIntParam(params, "width");
@@ -35,7 +35,7 @@ public class ImageTransformer implements Transformer {
 		}
 	}
 
-	private int getIntParam(List<TransformParam> params, String paramName) {
+	private int getIntParam(List<ModelParam> params, String paramName) {
 		return params.stream().filter(p -> p.getName().equals(paramName)).map(p -> Integer.parseInt(p.getValue()))
 				.findFirst().orElseThrow(() -> new IllegalArgumentException("Param is required: " + paramName));
 	}

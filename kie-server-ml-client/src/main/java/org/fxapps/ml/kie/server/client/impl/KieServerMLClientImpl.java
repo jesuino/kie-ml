@@ -6,7 +6,7 @@ import org.fxapps.ml.api.KieMLConstants;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.kie.server.client.KieServerMLClient;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.client.KieServicesConfiguration;
@@ -22,14 +22,14 @@ public class KieServerMLClientImpl extends AbstractKieServicesClientImpl impleme
 	}
 
 	@Override
-	public ServiceResponse<Prediction> predict(String containerId, String modelId, Input input) {
+	public ServiceResponse<Result> predict(String containerId, String modelId, Input input) {
 		String uri = String.join("/", 
 				baseUrl,
 				KieMLConstants.URI_BASE.replaceFirst("\\{" + KieMLConstants.PARAM_CONTAINER_ID + "\\}", containerId),
 				KieMLConstants.URI_PREDICTION.replaceAll("\\{" + KieMLConstants.PARAM_MODEL_ID + "\\}", modelId)
 		);
 		String body = marshaller.marshall(input);
-		return makeHttpPostRequestAndCreateServiceResponse(uri, body, Prediction.class, new HashMap<>());
+		return makeHttpPostRequestAndCreateServiceResponse(uri, body, Result.class, new HashMap<>());
 	}
 
 	@Override

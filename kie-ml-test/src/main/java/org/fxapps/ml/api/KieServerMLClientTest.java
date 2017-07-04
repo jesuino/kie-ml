@@ -22,7 +22,7 @@ import org.kie.server.api.model.ReleaseId;
 public class KieServerMLClientTest {
 
 	private static final String CONTAINER_ID = "test";
-	private static final String GAV = "org.fxapps.ml:kie-server-ml-test-models:0.0.1-SNAPSHOT";
+	private static final String GAV = "org.fxapps.ml:kie-ml-test-models:0.0.1-SNAPSHOT";
 
 	public static void main(String[] args) throws IOException {
 		KieServicesConfiguration configuration = KieServicesFactory
@@ -41,16 +41,17 @@ public class KieServerMLClientTest {
 		System.out.println(mlClient.getModel(CONTAINER_ID, "mnist").getResult());
 		Input input = new Input("file:/home/wsiqueir/MNIST/mnist_png/testing/2/174.png");
 		System.out.println(mlClient.predict(CONTAINER_ID, "mnist", input).getResult().getPredictions());
-		
-		InputStream is = KieServerMLClientTest.class.getResource("/data/iris2d_test_data.arff").openStream();
-		String arffContent = null;
-		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
-			arffContent =  buffer.lines().collect(Collectors.joining("\n"));
-        }
-		System.out.println("Sending data:" + arffContent);
-		System.out.println(mlClient.getModel(CONTAINER_ID, "iris2d").getResult());
-		Input input2 = new Input(null, arffContent, null);
-		System.out.println(mlClient.predict(CONTAINER_ID, "iris2d", input2).getResult().getPredictions());
+//		
+//		InputStream is = KieServerMLClientTest.class.getResource("/data/iris2d_test_data.arff").openStream();
+//		String arffContent = null;
+//		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
+//			arffContent =  buffer.lines().collect(Collectors.joining("\n"));
+//        }
+//		System.out.println("Sending data:" + arffContent);
+//		System.out.println(mlClient.getModel(CONTAINER_ID, "iris2d").getResult());
+//		Input input2 = new Input(null, arffContent, null);
+//		System.out.println(mlClient.predict(CONTAINER_ID, "iris2d", input2).getResult().getPredictions());
+		client.disposeContainer(CONTAINER_ID);
 
 	}
 

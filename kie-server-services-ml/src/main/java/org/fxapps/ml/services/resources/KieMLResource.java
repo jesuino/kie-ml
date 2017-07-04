@@ -22,7 +22,7 @@ import org.fxapps.ml.api.KieMLConstants;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
-import org.fxapps.ml.api.model.Prediction;
+import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.services.KieMLServicesBase;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.remote.rest.common.Header;
@@ -102,7 +102,7 @@ public class KieMLResource {
 		Header conversationIdHeader = buildConversationIdHeader(containerId, context, headers);
 		try {
 			Input input = marshallerHelper.unmarshal(containerId, inputPayload, contentType, Input.class);
-			ServiceResponse<Prediction> result = kieMLServicesBase.predict(containerId, modelId, input);
+			ServiceResponse<Result> result = kieMLServicesBase.predict(containerId, modelId, input);
 			return createCorrectVariant(marshallerHelper, containerId, result, headers, Response.Status.OK,
 					conversationIdHeader);
 		} catch (Exception e) {
