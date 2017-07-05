@@ -40,7 +40,7 @@ public abstract class AbstractKieServerMain {
         if (serverId != null) {
             KieServerStateFileRepository repository = new KieServerStateFileRepository();
             KieServerState currentState = repository.load(serverId);
-            
+            	
             Set<KieContainerResource> containers = new HashSet<KieContainerResource>();
             
 

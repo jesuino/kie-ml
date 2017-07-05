@@ -20,6 +20,7 @@
 		<module>kie-server-ml-client</module>
 		<module>kie-ml-weka</module>
 		<module>kie-ml-dl4j</module>
+		<module>kie-ml-opennlp</module>
 		<module>kie-ml-test-models</module>
 		<module>kie-ml-test</module>
 		<module>kie-ml-dist</module>

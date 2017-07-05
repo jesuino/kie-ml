@@ -17,6 +17,7 @@ import org.fxapps.ml.api.model.ModelList;
 import org.fxapps.ml.api.model.ModelParam;
 import org.fxapps.ml.api.service.KieMLService;
 import org.kie.api.KieServices;
+import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.runtime.KieContainer;
 
@@ -53,6 +54,7 @@ class KieMLContainerImpl implements KieMLContainer {
 
 	private static KieContainer loadKieContainer(ReleaseId releaseId) {
 		KieServices ks = KieServices.Factory.get();
+		KieFileSystem kfs = ks.newKieFileSystem();
 		KieContainer kieContainer = ks.newKieContainer(releaseId);
 		return kieContainer;
 	}
