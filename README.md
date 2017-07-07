@@ -11,6 +11,13 @@ $ mvn clean install
 
 It will take a while since it will download more then 400 dependencies, but after the first run all the other builds should be faster.
 
+## Running as Docker container
+
+A ```Dockerfile``` is located in the root path in the project. You can build and run kie-ml on Docker:
+~~~
+$ docker build -t kie-ml/kie-ml:latest .
+$ docker run --rm -p 8080 kie-ml/kie-ml:latest
+~~~
 
 ## Running
 
