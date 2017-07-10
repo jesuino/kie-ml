@@ -17,6 +17,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Variant;
+import javax.ws.rs.core.Response.Status;
 
 import org.fxapps.ml.api.KieMLConstants;
 import org.fxapps.ml.api.model.Input;
@@ -33,6 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Path("server/")
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class KieMLResource {
 	
 	public static final Logger logger = LoggerFactory.getLogger(KieMLResource.class);
@@ -51,29 +53,24 @@ public class KieMLResource {
 
 	@GET
 	@Path(KieMLConstants.URI_GET_MODELS)
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getModels(@javax.ws.rs.core.Context HttpHeaders headers,
-			@PathParam(CONTAINER_ID) String containerId) {
-		Variant v = getVariant(headers);
-		Header conversationIdHeader = buildConversationIdHeader(containerId, context, headers);
+	public Response getModels(@PathParam(CONTAINER_ID) String containerId) {
+		Response response;
 		try {
 			ServiceResponse<ModelList> result = kieMLServicesBase.getModels(containerId);
 			if (result.getType() == ServiceResponse.ResponseType.SUCCESS) {
-				return createCorrectVariant(marshallerHelper, containerId, result, headers, Response.Status.OK,
-						conversationIdHeader);
+				response = Response.ok(result).build();
+			} else {
+				response = Response.status(Status.NOT_FOUND).build();
 			}
-			return createCorrectVariant(marshallerHelper, containerId, result, headers, Response.Status.NOT_FOUND,
-					conversationIdHeader);
 		} catch (Exception e) {
-			logger.error("Unexpected error retrieving Model List. Message: '{}'", e.getMessage(), e);
-			return internalServerError("Unexpected error retrieving model list: " + e.getMessage(), v,
-					conversationIdHeader);
+			logger.warn("Unexpected error retrieving Model List. Message: '{}'", e.getMessage(), e);
+			response = Response.serverError().entity("Error retrieving model list: " + e.getMessage()).build();
 		}
+		return response;
 	}
 
 	@GET
 	@Path(KieMLConstants.URI_GET_MODEL)
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	public Response getModel(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
 			@PathParam(KieMLConstants.PARAM_MODEL_ID) String modelId) {
 		Variant v = getVariant(headers);
@@ -95,24 +92,21 @@ public class KieMLResource {
 	
 	@GET
 	@Path(KieMLConstants.URI_KIEML_CONTAINERS)
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response listContainers(@javax.ws.rs.core.Context HttpHeaders headers){
-		Variant v = getVariant(headers);
+	public Response listContainers(){
 		Response response;		
 		try {
 			ServiceResponse<KieContainerResourceList> result = kieMLServicesBase.listContainers();
-			response =  createCorrectVariant(result, headers, Response.Status.OK);
+			response =  Response.ok(result).build();
 		} catch (Exception e) {
-			logger.error("Unexpected error retrieving container List. Message: '{}'", e.getMessage(), e);
-			response = internalServerError("Unexpected error retrieving container list: " + e.getMessage(), v);
+			logger.warn("Unexpected error retrieving container List. Message: '{}'", e.getMessage(), e);
+			response = Response.serverError().entity("Unexpected error retrieving container list: " + e.getMessage()).build();
 		}
 		return response;
     }	
 
 	@POST
 	@Path(KieMLConstants.URI_PREDICTION)
-	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Consumes({  MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response predict(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
 			@PathParam(KieMLConstants.PARAM_MODEL_ID) String modelId, String inputPayload) {
 		Variant v = getVariant(headers);
