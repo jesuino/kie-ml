@@ -1,15 +1,20 @@
 package org.fxapps.ml.services;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
 import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.runtime.KieMLContainer;
+import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.KieContainerResourceList;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.api.model.ServiceResponse.ResponseType;
+import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;
 
 public class KieMLServicesBase {
@@ -54,14 +59,25 @@ public class KieMLServicesBase {
 			containers.remove(containerId);
 		}
 
+	public ServiceResponse<KieContainerResourceList> listContainers() {
+		List<KieContainerResource> containersList = containers.keySet().stream()
+						.map(context::getContainer)
+						.map(KieContainerInstance::getResource)
+						.collect(Collectors.toList());
+		KieContainerResourceList list = new KieContainerResourceList(containersList);
+		return new ServiceResponse<KieContainerResourceList>(ResponseType.SUCCESS, "Containers using KieML extension", list);
+	}
+
+	public KieServerRegistry getContext() {
+		return context;
+	}
+	
 	private void checkContainer(String containerId) {
 		if (!containers.containsKey(containerId)) {
 			throw new IllegalArgumentException("Container not found or does not contain KieMLContainers");
 		}
 	}
 
-	public KieServerRegistry getContext() {
-		return context;
-	}
+
 	
 }

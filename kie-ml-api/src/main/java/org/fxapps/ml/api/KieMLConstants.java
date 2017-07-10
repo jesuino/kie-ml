@@ -26,9 +26,10 @@ public class KieMLConstants {
 	public static final String PARAM_CONTAINER_ID = "id";
 	
 	// uris
+	public static final String URI_KIEML_CONTAINERS = "kieml/containers";
 	public static final String URI_BASE = "containers/{" + PARAM_CONTAINER_ID + "}/kieml";
-	public static final String URI_GET_MODELS = "";
-	public static final String URI_GET_MODEL = "{" + PARAM_MODEL_ID + "}";
-	public static final String URI_PREDICTION = "{" + PARAM_MODEL_ID + "}";
+	public static final String URI_GET_MODELS = URI_BASE;
+	public static final String URI_GET_MODEL = URI_BASE + "/{" + PARAM_MODEL_ID + "}";
+	public static final String URI_PREDICTION = URI_BASE + "/{" + PARAM_MODEL_ID + "}";
 
 }

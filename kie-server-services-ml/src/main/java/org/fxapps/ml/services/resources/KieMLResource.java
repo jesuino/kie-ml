@@ -24,6 +24,7 @@ import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelList;
 import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.services.KieMLServicesBase;
+import org.kie.server.api.model.KieContainerResourceList;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.remote.rest.common.Header;
 import org.kie.server.services.api.KieServerRegistry;
@@ -31,8 +32,9 @@ import org.kie.server.services.impl.marshal.MarshallerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path("server/" + KieMLConstants.URI_BASE)
+@Path("server/")
 public class KieMLResource {
+	
 	public static final Logger logger = LoggerFactory.getLogger(KieMLResource.class);
 
 	private KieMLServicesBase kieMLServicesBase;
@@ -90,6 +92,22 @@ public class KieMLResource {
 					conversationIdHeader);
 		}
 	}
+	
+	@GET
+	@Path(KieMLConstants.URI_KIEML_CONTAINERS)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public Response listContainers(@javax.ws.rs.core.Context HttpHeaders headers){
+		Variant v = getVariant(headers);
+		Response response;		
+		try {
+			ServiceResponse<KieContainerResourceList> result = kieMLServicesBase.listContainers();
+			response =  createCorrectVariant(result, headers, Response.Status.OK);
+		} catch (Exception e) {
+			logger.error("Unexpected error retrieving container List. Message: '{}'", e.getMessage(), e);
+			response = internalServerError("Unexpected error retrieving container list: " + e.getMessage(), v);
+		}
+		return response;
+    }	
 
 	@POST
 	@Path(KieMLConstants.URI_PREDICTION)
