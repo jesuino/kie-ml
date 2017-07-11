@@ -28,7 +28,13 @@ class KieMLServiceImpl implements KieMLService {
 		Optional<Model> modelSearch = kc.modelsList().getModels().stream().filter(m -> m.getId().equals(modelId)).findFirst();
 		Model model = modelSearch.orElseThrow(() -> new IllegalArgumentException("Model " + modelId + " not found."));
 		String providerId = model.getProvider();
-		return MLProviderFactory.getProvider(providerId).run(kc, model, input);
+		Result result = MLProviderFactory.getProvider(providerId).run(kc, model, input);
+		// we should find some way to filter the prediction map because some datasets may have hundreds of labels
+//		HashMap<String, Number> filteredPredictions = new HashMap<>();
+//		result.getPredictions().entrySet().stream().filter(e -> e.getValue().doubleValue() != 0.0).forEach(e -> 
+//			filteredPredictions.put(e.getKey(), e.getValue())
+//		);
+		return result;
 	}
 
 }

@@ -1,23 +1,18 @@
 package org.fxapps.ml.api;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 import org.drools.compiler.kproject.ReleaseIdImpl;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.kie.server.client.KieServerMLClient;
 import org.kie.server.api.marshalling.MarshallingFormat;
 import org.kie.server.api.model.KieContainerResource;
+import org.kie.server.api.model.ReleaseId;
 import org.kie.server.client.KieServicesClient;
 import org.kie.server.client.KieServicesConfiguration;
 import org.kie.server.client.KieServicesFactory;
-import org.kie.server.api.model.ReleaseId;
-
 
 public class KieServerMLClientTest {
 
@@ -57,10 +52,10 @@ public class KieServerMLClientTest {
 		
 		
 		input = new Input(null, SENTENCE, null);
-		System.out.println(mlClient.predict(CONTAINER_ID, "datePos", input).getResult().getPredictionsResult());
-		System.out.println(mlClient.predict(CONTAINER_ID, "timePos", input).getResult().getPredictionsResult());
-		System.out.println(mlClient.predict(CONTAINER_ID, "namePos", input).getResult().getPredictionsResult());
-		System.out.println(mlClient.predict(CONTAINER_ID, "tagger", input).getResult().getPredictionsResult());
+		System.out.println(mlClient.predict(CONTAINER_ID, "datePos", input).getResult().getText());
+		System.out.println(mlClient.predict(CONTAINER_ID, "timePos", input).getResult().getText());
+		System.out.println(mlClient.predict(CONTAINER_ID, "namePos", input).getResult().getText());
+		System.out.println(mlClient.predict(CONTAINER_ID, "tagger", input).getResult().getText());
 		System.out.println(mlClient.predict(CONTAINER_ID, "parser", input).getResult());
 		
 		client.disposeContainer(CONTAINER_ID);

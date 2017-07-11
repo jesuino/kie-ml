@@ -23,6 +23,7 @@ public class Model {
 	private String provider;
 	private String modelBinPath;
 	private String modelLabelsPath;
+	private InputType inputType;
 	private List<String> labels;
 	@XmlElement(name="modelParam")
 	private List<ModelParam> params;
@@ -81,6 +82,14 @@ public class Model {
 
 	public void setParams(List<ModelParam> params) {
 		this.params = params;
+	}
+	
+	public InputType getInputType() {
+		return inputType;
+	}
+
+	public void setInputType(InputType inputType) {
+		this.inputType = inputType;
 	}
 
 	@Override

@@ -44,9 +44,10 @@ public class DL4JKieMLProvider implements MLProvider {
 			INDArray image = transformer.transform(params, input);
 			InputStream isModel = kc.getModelBinInputStream(model);
 			MultiLayerNetwork dl4jModel = ModelSerializer.restoreMultiLayerNetwork(isModel);
+			
 			INDArray output = dl4jModel.output(image);
 			prediction = new Result();
-			prediction.setPredictionsResult(output.toString());
+			prediction.setText(output.toString());
 			prediction.setPredictions(new HashMap<>());
 			for (int i = 0; i < output.columns(); i++) {
 				prediction.getPredictions().put(model.getLabels().get(i), output.getDouble(i));
