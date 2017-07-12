@@ -15,8 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Result {
 	
 	private Map<String, Number> predictions;
-	private String predictionsResult;
-	private String resultTxt;
+	private String text;
 	
 	public Map<String, Number> getPredictions() {
 		return predictions;
@@ -24,24 +23,18 @@ public class Result {
 	public void setPredictions(Map<String, Number> predictions) {
 		this.predictions = predictions;
 	}
-	public String getPredictionsResult() {
-		return predictionsResult;
-	}
-	public void setPredictionsResult(String predictionsResult) {
-		this.predictionsResult = predictionsResult;
-	}
 	
-	public String getResultTxt() {
-		return resultTxt;
+	public String getText() {
+		return text;
 	}
-	public void setResultTxt(String resultTxt) {
-		this.resultTxt = resultTxt;
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 	@Override
 	public String toString() {
-		return "Result [predictions=" + predictions + ", predictionsResult=" + predictionsResult + ", resultTxt="
-				+ resultTxt + "]";
+		return "Result [predictions=" + predictions + ", text="
+				+ text + "]";
 	}
 	
 }

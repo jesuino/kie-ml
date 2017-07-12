@@ -2,6 +2,7 @@
 	<model>
 		<id>mnist</id>
 		<name>MNIST digit recognition</name>
+		<inputType>binary</inputType>
 		<description>Recognize handwritten digits using the MNIST dataset
 		</description>
 		<provider>deeplearning4j</provider>
@@ -24,6 +25,7 @@
 			<value>1</value>
 		</modelParam>
 	</model>
+	<!-- 
 	<model>
 		<id>iris2d</id>
 		<name>Iris 2d classifier</name>
@@ -36,9 +38,11 @@
 			<value>2</value>
 		</modelParam>
 	</model>
+	 -->
 	<model>
 		<id>datePos</id>
 		<name>Find date position</name>
+		<inputType>text</inputType>
 		<description>Find date position on a sentence using OpenNLP
 		</description>
 		<provider>opennlp</provider>
@@ -47,7 +51,7 @@
 			<name>model</name>
 			<value>NameFinder</value>
 		</modelParam>
-	</model>
+	</model><!-- 
 	<model>
 		<id>locationPos</id>
 		<name>Find location position</name>
@@ -119,10 +123,11 @@
 			<name>model</name>
 			<value>Parser</value>
 		</modelParam>
-	</model>
+	</model> -->
 	<model>
 		<id>tagger</id>
 		<name>Tag text tokens</name>
+		<inputType>text</inputType>
 		<description>Parse text
 		</description>
 		<provider>opennlp</provider>
@@ -131,5 +136,5 @@
 			<name>model</name>
 			<value>Tagger</value>
 		</modelParam>
-	</model>
+	</model> 
 </models>

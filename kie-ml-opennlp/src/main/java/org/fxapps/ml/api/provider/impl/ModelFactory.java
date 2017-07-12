@@ -70,7 +70,7 @@ public class ModelFactory {
 			sb.append(sentences[i]);
 			result.getPredictions().put(spans[i].toString(), spans[i].getProb());
 		}
-		result.setResultTxt(sb.toString());
+		result.setText(sb.toString());
 		return result;
 	}
 
@@ -128,8 +128,6 @@ public class ModelFactory {
 		for (Parse parse : parsingResult) {
 			StringBuffer sb = new StringBuffer();
 			parse.show(sb);
-			String resultStr = result.getResultTxt() + "\n" + parse + ": " + sb.toString();
-			result.setPredictionsResult(resultStr);
 		}
 		return result;
 	}
@@ -145,7 +143,7 @@ public class ModelFactory {
 		double[] outcomes = categorizer.categorize(getTokenizeData(data));
 		String category = categorizer.getBestCategory(outcomes);
 		Result result = new Result();
-		result.setPredictionsResult(category);
+		result.setText(category);
 		return result;
 	}
 	
