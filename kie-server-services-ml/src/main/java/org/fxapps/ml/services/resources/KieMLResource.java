@@ -58,7 +58,7 @@ public class KieMLResource {
 			}
 		} catch (Exception e) {
 			logger.warn("Unexpected error retrieving Model List. Message: '{}'", e.getMessage(), e);
-			response = Response.serverError().entity("Error retrieving model list: " + e.getMessage()).build();
+			response = Response.serverError().type("text/plain").entity("Error retrieving model list: " + e.getMessage()).build();
 		}
 		return response;
 	}
@@ -76,7 +76,7 @@ public class KieMLResource {
 			}
 		} catch (Exception e) {
 			logger.warn("Unexpected error Model. Message: '{}'", e.getMessage(), e);
-			response = Response.serverError().entity("Unexpected error Model: " + e.getMessage()).build();
+			response = Response.serverError().type("text/plain").entity("Unexpected error Model: " + e.getMessage()).build();
 		}
 		return response;
 	}
@@ -90,7 +90,7 @@ public class KieMLResource {
 			response =  Response.ok(result).build();
 		} catch (Exception e) {
 			logger.warn("Unexpected error retrieving container List. Message: '{}'", e.getMessage(), e);
-			response = Response.serverError().entity("Unexpected error retrieving container list: " + e.getMessage()).build();
+			response = Response.serverError().type("text/plain").entity("Unexpected error retrieving container list: " + e.getMessage()).build();
 		}
 		return response;
     }	
@@ -100,17 +100,14 @@ public class KieMLResource {
 	@Consumes({  MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response predict(@javax.ws.rs.core.Context HttpHeaders headers, @PathParam(CONTAINER_ID) String containerId,
 			@PathParam(KieMLConstants.PARAM_MODEL_ID) String modelId, String inputPayload) {
-		String contentType = getContentType(headers);
-		if(contentType.contains(";")) { 
-			contentType = contentType.split(";")[0];
-		}
+		String contentType = getContentType(headers).split(";")[0];
 		try {
 			Input input = marshallerHelper.unmarshal(containerId, inputPayload, contentType, Input.class);
 			ServiceResponse<Result> result = kieMLServicesBase.predict(containerId, modelId, input);
 			return Response.ok(result).build();
 		} catch (Exception e) {
 			logger.warn("Unexpected error running prediction. Message: '{}'", e.getMessage(), e);
-			return Response.serverError().entity("Unexpected error running prediction: " + e.getMessage()).build();
+			return Response.serverError().type("text/plain").entity("Unexpected error running prediction: " + e.getMessage()).build();
 		}
 	}
 
