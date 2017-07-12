@@ -125,60 +125,33 @@ Now that the container is created we can see all the models installed on it. At 
 We have a container running on Kie Server, but now it is time to make an actual prediction. Let's try our mnist trained model. We have mnist on the WEB, but our model was trained against minist with black background, hence on this github we can find a few test images. Here's the request we should make:
 
 ~~~
-curl -X POST -u 'kieserver:kieserver1!' -H 'Content-type: application/xml' --data '<input><url>https://raw.githubusercontent.com/gskielian/JPG-PNG-to-MNIST-NN-Format/master/training-images/1/im10007.png</url></input>' http://localhost:8080/rest/server/containers/test/kieml/mnist
+curl -v -X POST -u 'kieserver:kieserver1!' -H 'Content-type: application/json' --data '{ "org.fxapps.ml.api.model.Input" : { "url" : "https://raw.githubusercontent.com/gskielian/JPG-PNG-to-MNIST-NN-Format/master/training-images/1/im10007.png" }}' 'http://localhost:8080/rest/server/containers/test/kieml/mnist'
 ~~~
 
-And this should return the following XML:
-
+And this should return the following JSON:
 ~~~
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<response type="SUCCESS" msg="Success Running prediction">
-    <query-definitions xsi:type="prediction" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-        <predictions>
-            <entry>
-                <key>0</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>1</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">1.0</value>
-            </entry>
-            <entry>
-                <key>2</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>3</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>4</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>5</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>6</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>7</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>8</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-            <entry>
-                <key>9</key>
-                <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema">0.0</value>
-            </entry>
-        </predictions>
-        <predictionsResult>[0.00, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]</predictionsResult>
-    </query-definitions>
-</response>
+{  
+   "type":"SUCCESS",
+   "msg":"Success Running prediction",
+   "result":{  
+      "Result":{  
+         "predictions":{  
+            "0":0.0,
+            "1":1.0,
+            "2":0.0,
+            "3":0.0,
+            "4":0.0,
+            "5":0.0,
+            "6":0.0,
+            "7":0.0,
+            "8":0.0,
+            "9":0.0
+         },
+         "predictionsResult":"[0.00, 1.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]",
+         "resultTxt":null
+      }
+   }
+}
 ~~~
 
 As you can see on *predictionsResult* it classified the image as being an 1.
