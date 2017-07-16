@@ -53,10 +53,7 @@ public class KieServerMLClientTest {
 		
 		input = new Input(null, SENTENCE, null);
 		System.out.println(mlClient.predict(CONTAINER_ID, "datePos", input).getResult().getText());
-		System.out.println(mlClient.predict(CONTAINER_ID, "timePos", input).getResult().getText());
-		System.out.println(mlClient.predict(CONTAINER_ID, "namePos", input).getResult().getText());
 		System.out.println(mlClient.predict(CONTAINER_ID, "tagger", input).getResult().getText());
-		System.out.println(mlClient.predict(CONTAINER_ID, "parser", input).getResult());
 		
 		client.disposeContainer(CONTAINER_ID);
 

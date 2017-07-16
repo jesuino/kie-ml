@@ -25,20 +25,42 @@
 			<value>1</value>
 		</modelParam>
 	</model>
-	<!-- 
 	<model>
-		<id>iris2d</id>
-		<name>Iris 2d classifier</name>
-		<description>Iris 2d classifier using Weka J48 C4.5 implementation
+		<id>cifar10</id>
+		<name>CIFAR 10 VGG 16</name>
+		<inputType>binary</inputType>
+		<description>A model trained on CIFAR-10 dataset
+			(https://www.cs.utoronto.ca/~kriz/cifar.html), which means that it
+			can classify images on 10 different classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck
 		</description>
-		<provider>weka</provider>
-		<modelBinPath>models/iris2DJ48.bin</modelBinPath>
+		<provider>deeplearning4j</provider>
+		<modelBinPath>models/vgg16_dl4j_cifar10.zip</modelBinPath>
+		<modelLabelsPath>labels/cifar10_labels.txt</modelLabelsPath>
 		<modelParam>
-			<name>classIndex</name>
-			<value>2</value>
+			<name>transformerName</name>
+			<value>ImageTransformer</value>
 		</modelParam>
+		<modelParam>
+			<name>height</name>
+			<value>32</value>
+		</modelParam>
+		<modelParam>
+			<name>width</name>
+			<value>32</value>
+		</modelParam>
+		<modelParam>
+			<name>channels</name>
+			<value>3</value>
+		</modelParam>
+        <modelParam>
+            <name>DataNormalization</name>
+            <value>org.nd4j.linalg.dataset.api.preprocessor.VGG16ImagePreProcessor</value>
+        </modelParam>
 	</model>
-	 -->
+	<!-- <model> <id>iris2d</id> <name>Iris 2d classifier</name> <description>Iris 
+		2d classifier using Weka J48 C4.5 implementation </description> <provider>weka</provider> 
+		<modelBinPath>models/iris2DJ48.bin</modelBinPath> <modelParam> <name>classIndex</name> 
+		<value>2</value> </modelParam> </model> -->
 	<model>
 		<id>datePos</id>
 		<name>Find date position</name>
@@ -56,7 +78,7 @@
 		<id>tagger</id>
 		<name>Tag text tokens</name>
 		<inputType>text</inputType>
-		<description>Parse text
+		<description>Parse text tokens
 		</description>
 		<provider>opennlp</provider>
 		<modelBinPath>models/opennlp/en-pos-maxent.bin</modelBinPath>
@@ -64,5 +86,5 @@
 			<name>model</name>
 			<value>Tagger</value>
 		</modelParam>
-	</model> 
+	</model>
 </models>

@@ -15,10 +15,7 @@ public class OpenNLPAPIExample {
 		KieMLContainer container = KieMLContainer.newContainer(GAV);
 		KieMLService service = container.getService();
 		System.out.println(service.predict("datePos", input).getPredictions());
-		System.out.println(service.predict("timePos", input).getPredictions());
-		System.out.println(service.predict("namePos", input).getPredictions());
 		System.out.println(service.predict("tagger", input).getPredictions());
-		System.out.println(service.predict("parser", input));
 	}
 
 }

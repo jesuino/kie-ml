@@ -14,5 +14,17 @@
       </config-item>
     </configItems>
   </configuration>
-  <containers/>
+  <containers>
+    <container>
+      <containerId>test</containerId>
+      <releaseId>
+        <groupId>org.fxapps.ml</groupId>
+        <artifactId>kie-ml-test-models</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </releaseId>
+      <status>STARTED</status>
+      <configItems/>
+      <messages/>
+    </container>
+  </containers>
 </kie-server-state>
