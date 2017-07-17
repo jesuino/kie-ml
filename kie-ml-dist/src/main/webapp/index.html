@@ -11,7 +11,6 @@
 </head>
 <body ng-controller="KieMLController">
 	<div id="wrap">
-
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -60,6 +59,7 @@
 						<div class="input-group">
 							<span class="input-group-addon" id="modelLbl">Model </span> <select
 								class="form-control" aria-describedby="modelLbl"
+								ng-change='cleanResult()'
 								ng-disabled="!models || !kieContainers" ng-model="selectedModel"
 								ng-options="m.name for m in models"><option>Model
 									List</option></select>
@@ -67,6 +67,8 @@
 					</div>
 				</form>
 				<br />
+			   <p class="bg-info" ng-show="selectedModel.description">{{selectedModel.description}}</p>
+				
 				<div class="row">
 					<form id="InputForm" name="InputForm" class="form-horizontal"
 						role="form">
@@ -105,6 +107,16 @@
 				<hr />
 				<div class="row" ng-show="result">
 					<div class="col-sm-offset-1 col-sm-10">
+						<h3>Input</h3>
+						<div ng-show="selectedModel.inputType == 'binary'">
+							<img class="img-rounded" ng-src="{{ predictedImgUrl }}"
+								width="150" height="150" />
+						</div>
+						<div ng-show="selectedModel.inputType == 'text'">
+							<blockquote>
+								<p>{{ predictedText }}</p>
+							</blockquote>
+						</div>
 						<h3>Result</h3>
 						<div class="well" ng-show="result.text">{{ result.text }}</div>
 					</div>

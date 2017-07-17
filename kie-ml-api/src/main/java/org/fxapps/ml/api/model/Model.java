@@ -20,6 +20,7 @@ public class Model {
 
 	private String id;
 	private String name;
+	private String description;
 	private String provider;
 	private String modelBinPath;
 	private String modelLabelsPath;
@@ -90,6 +91,14 @@ public class Model {
 
 	public void setInputType(InputType inputType) {
 		this.inputType = inputType;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

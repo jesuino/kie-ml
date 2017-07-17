@@ -23,7 +23,12 @@ KieMLApp.controller('KieMLController', function($scope, $http) {
 		var modelsUri = MODELS_URI.replace("{id}", $scope.selectedContainer['container-id']);
 		$http.get(modelsUri).success(function(models){
 			$scope.models = models.result.ModelList.model;
+			$scope.cleanResult();
 		}).error(error);
+	}
+	
+	$scope.cleanResult = function(){
+		$scope.result = null;
 	}
 	
 	$scope.runModel = function(){
@@ -44,8 +49,18 @@ KieMLApp.controller('KieMLController', function($scope, $http) {
 		$http.post(runUri, input).success(function(response) {
 			$scope.result = response.result.Result;
 			$scope.loading = false;
+			if($scope.selectedModel.inputType === 'binary') {
+				if($scope.inputUrl.match(/\.(jpeg|jpg|gif|png)$/)){
+					$scope.predictedImgUrl = $scope.inputUrl;
+				} else {
+					$scope.predictedImgUrl = null; 
+				}
+			} else {
+				$scope.predictedText = $scope.inputText;
+			}
+			$('#errorAlert').hide();
 			$scope.inputUrl = null;
-			 $scope.inputText = null;
+			$scope.inputText = null;
 		}).error(error);
 		
 	}
