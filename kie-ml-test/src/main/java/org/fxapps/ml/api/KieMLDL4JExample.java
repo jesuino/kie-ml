@@ -12,10 +12,10 @@ public class KieMLDL4JExample {
 		Input input;
 		KieMLService service = KieMLContainer.newContainer(GAV).getService();
 
-		input = new Input("https://www.daimler.com/bilder/konzern/geschaeftsfelder/daimler-trucks/bildergalerie-2/freightliner-inspiration-truck-w820xh328-cutout.jpg");
+		input = new Input("https://r.hswstatic.com/w_907/gif/tesla-cat.jpg");
 		System.out.println(service.predict("cifar10", input).getPredictions());
 		
-		input = new Input(FILE_TO_PREDICT);
-		System.out.println(service.predict("mnist", input).getPredictions());
+//		input = new Input(FILE_TO_PREDICT);
+//		System.out.println(service.predict("mnist", input).getPredictions());
 	}
 }

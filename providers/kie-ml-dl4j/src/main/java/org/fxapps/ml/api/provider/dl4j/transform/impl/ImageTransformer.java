@@ -9,12 +9,12 @@ import java.util.Optional;
 import org.datavec.image.loader.NativeImageLoader;
 import org.fxapps.ml.api.model.Input;
 import org.fxapps.ml.api.model.ModelParam;
-import org.fxapps.ml.api.provider.dl4j.transform.Transformer;
+import org.fxapps.ml.api.provider.Transformer;
 import org.fxapps.ml.api.provider.dl4j.util.ParamsUtil;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 
-public class ImageTransformer implements Transformer {
+public class ImageTransformer implements Transformer<INDArray> {
 
 	@Override
 	public String getName() {

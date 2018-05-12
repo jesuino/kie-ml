@@ -14,7 +14,7 @@ import org.fxapps.ml.api.model.Model;
 import org.fxapps.ml.api.model.ModelParam;
 import org.fxapps.ml.api.model.Result;
 import org.fxapps.ml.api.provider.MLProvider;
-import org.fxapps.ml.api.provider.dl4j.transform.Transformer;
+import org.fxapps.ml.api.provider.Transformer;
 import org.fxapps.ml.api.provider.dl4j.transform.impl.TransformerFactory;
 import org.fxapps.ml.api.provider.dl4j.util.ParamsUtil;
 import org.fxapps.ml.api.runtime.KieMLContainer;
@@ -40,7 +40,7 @@ public class DL4JKieMLProvider implements MLProvider {
 			throw new IllegalArgumentException("Parameters to configure the input parsing are required!!");
 		}
 		String transformerName = ParamsUtil.getRequiredStringParam(params, "transformerName");
-		Transformer transformer = TransformerFactory.get(transformerName);
+		Transformer<INDArray> transformer = TransformerFactory.get(transformerName);
 		INDArray image = transformer.transform(params, input);
 		InputStream isModel = kc.getModelBinInputStream(model);
 		INDArray output = getOutput(isModel, image);

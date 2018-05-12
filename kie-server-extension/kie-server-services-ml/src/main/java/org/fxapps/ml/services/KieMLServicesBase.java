@@ -13,7 +13,7 @@ import org.fxapps.ml.api.runtime.KieMLContainer;
 import org.kie.server.api.model.KieContainerResource;
 import org.kie.server.api.model.KieContainerResourceList;
 import org.kie.server.api.model.ServiceResponse;
-import org.kie.server.api.model.ServiceResponse.ResponseType;
+import org.kie.server.api.model.KieServiceResponse;
 import org.kie.server.services.api.KieContainerInstance;
 import org.kie.server.services.api.KieServerRegistry;
 
@@ -32,20 +32,20 @@ public class KieMLServicesBase {
 		checkContainer(containerId);
 		KieMLContainer kieMLContainer = containers.get(containerId);
 		Result predict = kieMLContainer.getService().predict(modelId, input);
-		return new ServiceResponse<Result>(ResponseType.SUCCESS, "Success Running prediction", predict);
+		return new ServiceResponse<Result>(KieServiceResponse.ResponseType.SUCCESS, "Success Running prediction", predict);
 	}
 
 	public ServiceResponse<ModelList> getModels(String containerId) {
 		checkContainer(containerId);
-		return new ServiceResponse<ModelList>(ResponseType.SUCCESS, "Model List",
+		return new ServiceResponse<ModelList>(KieServiceResponse.ResponseType.SUCCESS, "Model List",
 				containers.get(containerId).modelsList());
 	}
 
 	public ServiceResponse<Model> getModel(String containerId, String modelId) {
 		checkContainer(containerId);
 		return containers.get(containerId).modelsList().getModels().stream().filter(m -> m.getId().equals(modelId))
-				.map(m -> new ServiceResponse<Model>(ResponseType.SUCCESS, "Found model", m)).findFirst()
-				.orElse(new ServiceResponse<Model>(ResponseType.FAILURE, "Model Not found: " + modelId));
+				.map(m -> new ServiceResponse<Model>(KieServiceResponse.ResponseType.SUCCESS, "Found model", m)).findFirst()
+				.orElse(new ServiceResponse<Model>(KieServiceResponse.ResponseType.SUCCESS, "Model Not found: " + modelId));
 	}
 
 	public void addContainer(String containerId, KieMLContainer kieMLContainer) {
@@ -65,7 +65,7 @@ public class KieMLServicesBase {
 						.map(KieContainerInstance::getResource)
 						.collect(Collectors.toList());
 		KieContainerResourceList list = new KieContainerResourceList(containersList);
-		return new ServiceResponse<KieContainerResourceList>(ResponseType.SUCCESS, "Containers using KieML extension", list);
+		return new ServiceResponse<KieContainerResourceList>(KieServiceResponse.ResponseType.SUCCESS, "Containers using KieML extension", list);
 	}
 
 	public KieServerRegistry getContext() {

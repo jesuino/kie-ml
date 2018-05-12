@@ -54,7 +54,6 @@ class KieMLContainerImpl implements KieMLContainer {
 
 	private static KieContainer loadKieContainer(ReleaseId releaseId) {
 		KieServices ks = KieServices.Factory.get();
-		KieFileSystem kfs = ks.newKieFileSystem();
 		KieContainer kieContainer = ks.newKieContainer(releaseId);
 		return kieContainer;
 	}
