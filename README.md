@@ -13,11 +13,14 @@ It will take a while since it will download more then 400 dependencies, but afte
 
 ## Running as Docker container
 
-A ```Dockerfile``` is located in the root path in the project. You can build and run kie-ml on Docker:
+A ```Dockerfile``` is located in the root path in the project. You can build and run kie-ml on Docker. Or you can pull it from
+Docker Hub:
 ~~~
-$ docker build -t kie-ml/kie-ml:latest .
-$ docker run --rm -p 8080 kie-ml/kie-ml:latest
+$ docker pull kieml/kie-ml:latest
+$ docker run --rm -p 8080 kieml/kie-ml:latest
 ~~~
+
+**NOTE:** Before build the Docker image, make sure you built all artifacts as described in [Building Everything](#Building_Everything) section.
 
 ## Running
 
